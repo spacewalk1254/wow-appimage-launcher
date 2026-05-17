@@ -317,13 +317,17 @@ function configureClientMode(client) {
   els.realmListField.hidden = battleNet;
   els.clearCacheButton.hidden = battleNet;
   els.instanceCountSelect.value = battleNet ? "1" : els.instanceCountSelect.value;
-  els.instanceCountSelect.closest(".instance-picker").hidden = battleNet;
+  const instancePicker = els.instanceCountSelect.closest(".instance-picker");
+  instancePicker.hidden = battleNet;
+  instancePicker.style.display = battleNet ? "none" : "";
   for (const button of els.tabButtons) {
     const battleNetOnly = button.dataset.tab === "installedGames";
     const wowOnly = button.dataset.tab === "addons";
     button.hidden = (battleNetOnly && !battleNet) || (wowOnly && battleNet);
   }
-  els.battleNetScreenshotGameSelect.closest(".battle-net-screenshot-picker").hidden = !battleNet;
+  const screenshotGamePicker = els.battleNetScreenshotGameSelect.closest(".battle-net-screenshot-picker");
+  screenshotGamePicker.hidden = !battleNet;
+  screenshotGamePicker.style.display = battleNet ? "" : "none";
 }
 
 async function loadRealmlist() {

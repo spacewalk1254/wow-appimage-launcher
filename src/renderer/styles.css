@@ -780,6 +780,11 @@ label span {
   background: rgba(255, 255, 255, 0.075);
 }
 
+.instance-picker[hidden],
+.battle-net-screenshot-picker[hidden] {
+  display: none !important;
+}
+
 .instance-picker span {
   margin: 0;
   color: var(--muted);
@@ -1733,7 +1738,9 @@ code {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.055);
+  background:
+    linear-gradient(135deg, rgba(199, 170, 119, 0.12), transparent 38%),
+    linear-gradient(180deg, rgba(47, 41, 36, 0.72), rgba(12, 10, 8, 0.82));
   transition:
     transform 180ms var(--ease),
     background 180ms var(--ease),
@@ -1750,9 +1757,7 @@ code {
   gap: 10px;
   padding: 12px;
   border: 0;
-  background:
-    linear-gradient(135deg, rgba(199, 170, 119, 0.12), transparent 38%),
-    linear-gradient(180deg, rgba(47, 41, 36, 0.72), rgba(12, 10, 8, 0.82));
+  background: transparent;
   color: var(--text);
   text-align: left;
   cursor: pointer;
@@ -1765,7 +1770,14 @@ code {
   width: 38px;
   height: 38px;
   padding: 0;
-  color: #f1c7c9;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--muted);
+  box-shadow: none;
+}
+
+.addon-remove-button:hover {
+  color: #ffd4cf;
 }
 
 .addon-card-button:focus-visible {
