@@ -321,8 +321,7 @@ function configureClientMode(client) {
   for (const button of els.tabButtons) {
     const battleNetOnly = button.dataset.tab === "installedGames";
     const wowOnly = button.dataset.tab === "addons";
-    const screenshotsOnly = button.dataset.tab === "screenshots";
-    button.hidden = (battleNetOnly && !battleNet) || (wowOnly && battleNet) || (screenshotsOnly && !battleNet);
+    button.hidden = (battleNetOnly && !battleNet) || (wowOnly && battleNet);
   }
   els.battleNetScreenshotGameSelect.closest(".battle-net-screenshot-picker").hidden = !battleNet;
 }
@@ -671,7 +670,7 @@ function activateTab(tabName) {
   if (isBattleNetClient() && tabName === "addons") {
     tabName = "installedGames";
   }
-  if (!isBattleNetClient() && (tabName === "installedGames" || tabName === "screenshots")) {
+  if (!isBattleNetClient() && tabName === "installedGames") {
     tabName = "launcher";
   }
   closeCalendarPopover();
