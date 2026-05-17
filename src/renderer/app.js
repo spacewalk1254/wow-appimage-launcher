@@ -193,6 +193,20 @@ function formatPlaytime(ms) {
   return `${hours}h ${minutes}m`;
 }
 
+function formatLastLaunched(client) {
+  const launchedAt = client?.lastLaunchedAt ? Date.parse(client.lastLaunchedAt) : NaN;
+  if (!Number.isFinite(launchedAt)) {
+    return "Never launched";
+  }
+  return new Date(launchedAt).toLocaleString();
+}
+
+function renderLastLaunchedStatus(client = activeClient) {
+  els.statusTitle.textContent = "Last Played";
+  els.statusText.textContent = formatLastLaunched(client);
+  els.statusTitle.dataset.tone = "neutral";
+}
+
 function currentPlayMs(client) {
   const baseMs = Number(client?.totalPlayMs) || 0;
   const startedAt = client?.activeSession?.startedAt ? Date.parse(client.activeSession.startedAt) : NaN;
@@ -405,6 +419,7 @@ function hydrateClient(client) {
   renderCommandPreview();
   renderClients();
   renderEventVersionOptions();
+  renderLastLaunchedStatus(client);
   loadRealmlist();
   if (document.querySelector("#installedGamesTab")?.dataset.active === "true") {
     refreshInstalledGames();
@@ -431,7 +446,6 @@ async function selectClient(clientId) {
   const nextTab = selectedClient?.id === "battle-net" && selectedClient?.executablePath ? "installedGames" : "launcher";
   hydrateClient(selectedClient);
   activateTab(nextTab);
-  setStatus("Selected", `${selectedClient.title} ${selectedClient.version}`);
   if (document.querySelector("#addonsTab")?.dataset.active === "true") {
     refreshAddons();
   }
