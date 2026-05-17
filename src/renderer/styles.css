@@ -338,6 +338,7 @@ label span {
 
 .add-client-button {
   min-height: 50px;
+  padding: 0 34px;
   justify-content: center;
   position: relative;
   overflow: hidden;
@@ -362,9 +363,10 @@ label span {
 .client-card {
   position: relative;
   width: 100%;
-  min-height: 70px;
-  padding: 10px 18px 10px 16px;
-  gap: 12px;
+  min-height: 54px;
+  padding: 8px 34px;
+  justify-content: center;
+  gap: 0;
   isolation: isolate;
   border: 2px solid #080b0f;
   border-radius: 4px;
@@ -387,7 +389,7 @@ label span {
 .add-client-button::before {
   content: "";
   position: absolute;
-  inset: 7px 18px;
+  inset: 7px 24px;
   width: auto;
   border: 1px solid rgba(74, 166, 216, 0.28);
   border-radius: 2px;
@@ -406,8 +408,8 @@ label span {
 .add-client-button::after {
   content: "";
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 16px;
+  right: 16px;
   top: 50%;
   width: auto;
   height: 8px;
@@ -496,14 +498,15 @@ label span {
 
 .delete-client-button {
   width: 34px;
-  height: 44px;
+  height: 34px;
   flex: 0 0 34px;
   display: grid;
   place-items: center;
   border: 2px solid #080b0f;
-  border-radius: 6px;
+  border-radius: 2px;
+  clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0 50%);
   background:
-    linear-gradient(180deg, #513137, #181117);
+    linear-gradient(180deg, #c98e6e, #513137 32%, #181117 70%, #8b5842);
   color: #f3c8ca;
   font-weight: 900;
 }
@@ -511,10 +514,10 @@ label span {
 .custom-client-picker {
   position: relative;
   min-width: 0;
-  padding: 11px;
+  padding: 10px 28px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 34px;
-  gap: 8px;
+  gap: 10px;
   align-items: end;
   isolation: isolate;
   overflow: hidden;
@@ -545,7 +548,8 @@ label span {
 .custom-client-picker label {
   min-width: 0;
   display: grid;
-  gap: 6px;
+  gap: 5px;
+  text-align: center;
 }
 
 .custom-client-picker label span {
@@ -554,48 +558,26 @@ label span {
 
 .custom-client-picker select {
   min-width: 0;
-  min-height: 40px;
-  border-radius: 6px;
-  background: #0b0908;
+  min-height: 34px;
+  border: 1px solid rgba(74, 166, 216, 0.3);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(37, 58, 72, 0.92), rgba(7, 13, 20, 0.96) 48%, rgba(20, 37, 50, 0.94));
+  color: #f1d99b;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
 }
+
 
 .client-rune {
-  width: 50px;
-  height: 50px;
-  display: grid;
-  place-items: center;
-  flex: 0 0 50px;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #070a0e;
-  border-radius: 6px;
-  background:
-    linear-gradient(135deg, transparent 0 18%, rgba(0, 0, 0, 0.28) 18% 24%, transparent 24% 100%),
-    radial-gradient(circle at 50% 38%, rgba(74, 166, 216, 0.2), transparent 40%),
-    linear-gradient(180deg, #4a5964, #18222b 62%, #080d13);
-  color: #f0d28f;
-  font-size: 0.78rem;
-  font-weight: 950;
-  text-shadow: 0 2px 0 #050403;
-  box-shadow:
-    inset 0 0 0 1px rgba(225, 193, 120, 0.14),
-    inset 0 -9px 0 rgba(0, 0, 0, 0.24);
-}
-
-.client-row[data-active="true"] .client-rune {
-  background:
-    linear-gradient(135deg, transparent 0 18%, rgba(0, 0, 0, 0.3) 18% 24%, transparent 24% 100%),
-    radial-gradient(circle at 50% 38%, rgba(74, 166, 216, 0.32), transparent 42%),
-    linear-gradient(180deg, #7b6231, #243848 68%, #080d12);
-  color: #f6e0a6;
-  box-shadow:
-    inset 0 0 0 1px rgba(225, 193, 120, 0.2),
-    inset 0 -9px 0 rgba(0, 0, 0, 0.3);
+  display: none;
 }
 
 .client-card > span:last-child {
   min-width: 0;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
+  text-align: center;
 }
 
 .client-card strong,
@@ -605,6 +587,28 @@ label span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.client-card strong {
+  color: #f1d99b;
+  font-size: 0.94rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  text-shadow:
+    0 2px 0 #050403,
+    0 0 8px rgba(74, 166, 216, 0.3);
+}
+
+.client-card small {
+  margin-top: 2px;
+  color: #9fb6bf;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.client-row[data-active="true"] .client-card strong {
+  color: #fff0bd;
 }
 
 .client-card small,
@@ -627,11 +631,11 @@ label span {
 
 .sidebar-calendar-button {
   position: relative;
-  min-height: 68px;
+  min-height: 58px;
   width: 100%;
   display: grid;
   place-items: center;
-  gap: 4px;
+  gap: 2px;
   isolation: isolate;
   overflow: hidden;
   border: 2px solid #080b0f;
@@ -649,14 +653,20 @@ label span {
 }
 
 .sidebar-calendar-button span {
-  color: var(--muted);
+  color: #9fb6bf;
   font-size: 0.68rem;
   font-weight: 850;
   text-transform: uppercase;
 }
 
 .sidebar-calendar-button strong {
+  color: #f1d99b;
   font-size: 0.94rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  text-shadow:
+    0 2px 0 #050403,
+    0 0 8px rgba(74, 166, 216, 0.3);
 }
 
 .visually-hidden {
