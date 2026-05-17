@@ -193,17 +193,16 @@ function formatPlaytime(ms) {
   return `${hours}h ${minutes}m`;
 }
 
-function formatLastLaunched(client) {
-  const launchedAt = client?.lastLaunchedAt ? Date.parse(client.lastLaunchedAt) : NaN;
-  if (!Number.isFinite(launchedAt)) {
-    return "Never launched";
-  }
-  return new Date(launchedAt).toLocaleString();
+function lastLaunchedClient() {
+  return [...(state?.config?.clients || [])]
+    .filter((client) => Number.isFinite(Date.parse(client.lastLaunchedAt || "")))
+    .sort((a, b) => Date.parse(b.lastLaunchedAt) - Date.parse(a.lastLaunchedAt))[0] || null;
 }
 
-function renderLastLaunchedStatus(client = activeClient) {
+function renderLastLaunchedStatus() {
+  const client = lastLaunchedClient();
   els.statusTitle.textContent = "Last Played";
-  els.statusText.textContent = formatLastLaunched(client);
+  els.statusText.textContent = client ? `${client.title} ${client.version}` : "Never launched";
   els.statusTitle.dataset.tone = "neutral";
 }
 
@@ -419,7 +418,7 @@ function hydrateClient(client) {
   renderCommandPreview();
   renderClients();
   renderEventVersionOptions();
-  renderLastLaunchedStatus(client);
+  renderLastLaunchedStatus();
   loadRealmlist();
   if (document.querySelector("#installedGamesTab")?.dataset.active === "true") {
     refreshInstalledGames();
