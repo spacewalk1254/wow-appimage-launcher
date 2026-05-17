@@ -269,6 +269,7 @@ function setSetupOpen(open) {
 }
 
 function gatherClient() {
+  const battleNet = isBattleNetClient(activeClient);
   return {
     ...activeClient,
     title: els.clientTitleInput.value.trim(),
@@ -277,7 +278,7 @@ function gatherClient() {
     executablePath: els.executableInput.value.trim(),
     workingDirectory: els.workingDirectoryInput.value.trim(),
     realmListPath: els.realmListInput.value.trim(),
-    instanceCount: Number.parseInt(els.instanceCountSelect.value, 10) || 1,
+    instanceCount: battleNet ? 1 : Number.parseInt(els.instanceCountSelect.value, 10) || 1,
     protonPath: els.protonPathInput.value.trim(),
     compatDataPath: els.compatDataInput.value.trim(),
     launchArgs: els.launchArgsInput.value.trim(),
@@ -315,10 +316,13 @@ function configureClientMode(client) {
   els.realmlistPanel.hidden = battleNet;
   els.realmListField.hidden = battleNet;
   els.clearCacheButton.hidden = battleNet;
+  els.instanceCountSelect.value = battleNet ? "1" : els.instanceCountSelect.value;
+  els.instanceCountSelect.closest(".instance-picker").hidden = battleNet;
   for (const button of els.tabButtons) {
     const battleNetOnly = button.dataset.tab === "installedGames";
     const wowOnly = button.dataset.tab === "addons";
-    button.hidden = (battleNetOnly && !battleNet) || (wowOnly && battleNet);
+    const screenshotsOnly = button.dataset.tab === "screenshots";
+    button.hidden = (battleNetOnly && !battleNet) || (wowOnly && battleNet) || (screenshotsOnly && !battleNet);
   }
   els.battleNetScreenshotGameSelect.closest(".battle-net-screenshot-picker").hidden = !battleNet;
 }
@@ -390,7 +394,7 @@ function hydrateClient(client) {
   els.protonPathInput.value = client.protonPath || state.protonCandidates?.[0] || "";
   els.compatDataInput.value = client.compatDataPath || "";
   els.launchArgsInput.value = client.launchArgs || "";
-  els.instanceCountSelect.value = String(client.instanceCount || 1);
+  els.instanceCountSelect.value = isBattleNetClient(client) ? "1" : String(client.instanceCount || 1);
   els.environmentInput.value = client.environment || "";
   els.notesInput.value = client.notes || "";
   els.launchButton.disabled = !client.executablePath;
@@ -422,8 +426,8 @@ async function selectClient(clientId) {
   state.config = await api.setActiveClient(clientId);
   const selectedClient = state.config.clients.find((item) => item.id === clientId);
   const nextTab = selectedClient?.id === "battle-net" && selectedClient?.executablePath ? "installedGames" : "launcher";
-  activateTab(nextTab);
   hydrateClient(selectedClient);
+  activateTab(nextTab);
   setStatus("Selected", `${selectedClient.title} ${selectedClient.version}`);
   if (document.querySelector("#addonsTab")?.dataset.active === "true") {
     refreshAddons();
@@ -667,7 +671,7 @@ function activateTab(tabName) {
   if (isBattleNetClient() && tabName === "addons") {
     tabName = "installedGames";
   }
-  if (!isBattleNetClient() && tabName === "installedGames") {
+  if (!isBattleNetClient() && (tabName === "installedGames" || tabName === "screenshots")) {
     tabName = "launcher";
   }
   closeCalendarPopover();
@@ -792,9 +796,23 @@ async function refreshAddons() {
           <strong></strong>
         </span>
       </button>
+      <button class="icon-button addon-remove-button danger-action" type="button" title="Remove addon" aria-label="Remove addon">×</button>
     `;
     row.querySelector("strong").textContent = addon.name;
-    row.querySelector("button").addEventListener("click", () => api.openPath(addon.path));
+    row.querySelector(".addon-card-button").addEventListener("click", () => api.openPath(addon.path));
+    row.querySelector(".addon-remove-button").addEventListener("click", async (event) => {
+      event.stopPropagation();
+      if (!window.confirm(`Are you sure you want to delete ${addon.name}?`)) {
+        return;
+      }
+      try {
+        await api.deleteAddon(addon.path);
+        await refreshAddons();
+        setStatus("Addon Deleted", addon.name, "danger");
+      } catch (error) {
+        setStatus("Delete Failed", error.message, "danger");
+      }
+    });
     els.addonsList.append(row);
   }
 }

@@ -520,7 +520,9 @@ async function launchClient(client) {
     SteamGameId: "0"
   };
 
-  const instanceCount = Math.min(8, Math.max(1, Number.parseInt(normalized.instanceCount, 10) || 1));
+  const instanceCount = normalized.id === "battle-net"
+    ? 1
+    : Math.min(8, Math.max(1, Number.parseInt(normalized.instanceCount, 10) || 1));
   const launchedAt = new Date().toISOString();
   const pids = [];
   for (let index = 0; index < instanceCount; index += 1) {
@@ -875,6 +877,19 @@ function resolveAddonsPath(addonsPath) {
   return addonsPath;
 }
 
+function deleteAddon(addonPath) {
+  const targetPath = String(addonPath || "");
+  if (!targetPath || !fs.existsSync(targetPath)) {
+    throw new Error("Addon folder was not found.");
+  }
+  const stat = fs.statSync(targetPath);
+  if (!stat.isDirectory()) {
+    throw new Error("Only addon folders can be deleted.");
+  }
+  fs.rmSync(targetPath, { recursive: true, force: false });
+  return { path: targetPath, removed: true };
+}
+
 function resolveRealmlistPath(client) {
   const normalized = normalizeClient(client);
   if (normalized.realmListPath) {
@@ -1071,6 +1086,7 @@ ipcMain.handle("calendar:delete", (_event, eventId) => {
 });
 
 ipcMain.handle("addons:list", (_event, addonsPath) => addonEntries(addonsPath));
+ipcMain.handle("addons:delete", (_event, addonPath) => deleteAddon(addonPath));
 ipcMain.handle("addons:resolve-path", (_event, addonsPath) => resolveAddonsPath(addonsPath));
 ipcMain.handle("screenshots:list", (_event, screenshotsPath) => screenshotEntries(screenshotsPath));
 ipcMain.handle("client:clear-cache", (_event, client) => clearClientCache(client));

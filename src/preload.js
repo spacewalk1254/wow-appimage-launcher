@@ -17,6 +17,7 @@ contextBridge.exposeInMainWorld("wowClient", {
   saveCalendarEvent: (event) => ipcRenderer.invoke("calendar:save", event),
   deleteCalendarEvent: (eventId) => ipcRenderer.invoke("calendar:delete", eventId),
   listAddons: (addonsPath) => ipcRenderer.invoke("addons:list", addonsPath),
+  deleteAddon: (addonPath) => ipcRenderer.invoke("addons:delete", addonPath),
   resolveAddonsPath: (addonsPath) => ipcRenderer.invoke("addons:resolve-path", addonsPath),
   listScreenshots: (screenshotsPath) => ipcRenderer.invoke("screenshots:list", screenshotsPath),
   openPath: (targetPath) => ipcRenderer.invoke("shell:open-path", targetPath),
