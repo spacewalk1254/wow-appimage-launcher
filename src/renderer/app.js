@@ -466,6 +466,12 @@ async function deleteCustomClient(client) {
 function renderClients() {
   els.clientList.replaceChildren();
   const builtInClientIds = new Set(["vanilla", "tbc", "wotlk", "battle-net"]);
+  const menuLabels = {
+    vanilla: "Vanilla",
+    tbc: "TBC",
+    wotlk: "WOTLK",
+    "battle-net": "Battle.net"
+  };
   const builtInClients = state.config.clients.filter((client) => builtInClientIds.has(client.id));
   const customClients = state.config.clients.filter((client) => !builtInClientIds.has(client.id));
 
@@ -485,7 +491,7 @@ function renderClients() {
     `;
     const button = row.querySelector(".client-card");
     row.querySelector(".client-rune").textContent = client.version;
-    row.querySelector(".client-name").textContent = client.title;
+    row.querySelector(".client-name").textContent = menuLabels[client.id] || client.title;
     const detail = `${formatPlaytime(currentPlayMs(client))} played`;
     row.querySelector(".client-meta").textContent = detail;
     row.querySelector(".client-meta").title = client.executablePath ? "Configured" : `${client.folderName}/Wow.exe not configured`;

@@ -1974,3 +1974,345 @@ code {
     transition-duration: 1ms !important;
   }
 }
+
+/* Warcraft III menu-style sidebar */
+.app-shell {
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
+.sidebar {
+  gap: 10px;
+  padding: 14px 16px;
+  border-right: 2px solid #060403;
+  background:
+    radial-gradient(circle at 7px 8px, #5f6670 0 2px, #181716 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - 7px) 8px, #5f6670 0 2px, #181716 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at 88% 42%, rgba(196, 40, 26, 0.5), transparent 11%),
+    radial-gradient(circle at 40% 16%, rgba(113, 167, 121, 0.26), transparent 24%),
+    linear-gradient(180deg, rgba(8, 18, 21, 0.62), rgba(8, 12, 10, 0.92) 58%, rgba(18, 17, 11, 0.98)),
+    linear-gradient(135deg, #172c2f 0%, #263c3d 34%, #1f312f 54%, #151813 100%);
+  backdrop-filter: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(118, 103, 81, 0.52),
+    inset 7px 0 0 rgba(10, 8, 7, 0.82),
+    inset -7px 0 0 rgba(10, 8, 7, 0.82),
+    16px 0 28px rgba(0, 0, 0, 0.48);
+}
+
+.sidebar::before,
+.sidebar::after {
+  display: block;
+}
+
+.sidebar::before {
+  inset: 0;
+  background:
+    linear-gradient(112deg, transparent 0 11%, rgba(164, 202, 199, 0.13) 11.5% 12%, transparent 12.5% 100%),
+    linear-gradient(108deg, transparent 0 36%, rgba(159, 201, 194, 0.11) 36.5% 37%, transparent 37.5% 100%),
+    linear-gradient(113deg, transparent 0 72%, rgba(159, 201, 194, 0.1) 72.5% 73%, transparent 73.5% 100%),
+    radial-gradient(circle at 62% 18%, rgba(152, 203, 69, 0.46), transparent 3%),
+    linear-gradient(114deg, transparent 0 50%, rgba(122, 166, 57, 0.46) 50.5% 52%, transparent 52.5% 100%),
+    linear-gradient(160deg, transparent 0 46%, rgba(17, 29, 28, 0.86) 46.5% 56%, transparent 56.5% 100%),
+    linear-gradient(22deg, rgba(13, 20, 19, 0.94) 0 30%, transparent 30.5%),
+    linear-gradient(338deg, rgba(21, 25, 20, 0.94) 0 25%, transparent 25.5%);
+  opacity: 0.9;
+}
+
+.sidebar::after {
+  inset: auto 18px 66px auto;
+  width: 44px;
+  height: 150px;
+  background:
+    linear-gradient(90deg, transparent 0 46%, #17100d 46% 54%, transparent 54% 100%),
+    linear-gradient(180deg, transparent 0 24%, #6e120d 24% 68%, transparent 68% 100%);
+  clip-path: polygon(46% 0, 57% 0, 57% 24%, 100% 31%, 84% 72%, 65% 64%, 54% 100%, 44% 100%, 36% 64%, 14% 73%, 0 31%, 46% 24%);
+  opacity: 0.58;
+  filter: drop-shadow(0 7px 4px rgba(0, 0, 0, 0.52));
+}
+
+.brand {
+  display: none;
+}
+
+.client-list {
+  gap: 10px;
+}
+
+.client-row {
+  position: relative;
+  display: block;
+  min-height: 58px;
+}
+
+.client-row::before,
+.client-row::after {
+  content: "";
+  position: absolute;
+  top: 25px;
+  z-index: 2;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid #0b0908;
+  background:
+    radial-gradient(circle at 42% 36%, #8a8f95 0 1px, transparent 1.4px),
+    linear-gradient(180deg, #4b4c50, #171513 58%, #55402f);
+  box-shadow: 0 0 0 1px rgba(116, 91, 62, 0.72);
+}
+
+.client-row::before {
+  left: -4px;
+}
+
+.client-row::after {
+  right: -4px;
+}
+
+.client-card,
+.add-client-button,
+.sidebar-calendar-button {
+  width: 100%;
+  min-height: 58px;
+  height: 58px;
+  padding: 8px 30px 9px;
+  justify-content: center;
+  border: 2px solid #15100c;
+  border-radius: 2px;
+  clip-path: none;
+  color: #f2d35b;
+  overflow: visible;
+  background:
+    linear-gradient(180deg, #5a4a33 0 4%, #15110e 4% 12%, #32261d 12% 16%, #070605 16% 84%, #30251d 84% 88%, #14100d 88% 96%, #6c583b 96% 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(148, 116, 70, 0.85),
+    inset 0 2px 0 rgba(255, 255, 255, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.55);
+}
+
+.client-card::before,
+.add-client-button::before,
+.sidebar-calendar-button::before {
+  inset: 6px 12px;
+  border: 1px solid #2d5f9f;
+  border-radius: 2px;
+  clip-path: none;
+  background:
+    linear-gradient(180deg, rgba(117, 185, 255, 0.32), transparent 26%),
+    linear-gradient(90deg, rgba(12, 23, 52, 0.85), rgba(7, 61, 135, 0.98) 18%, rgba(9, 52, 119, 0.98) 74%, rgba(5, 18, 48, 0.9)),
+    linear-gradient(180deg, #0f4fae, #062454);
+  box-shadow:
+    inset 0 1px 0 rgba(178, 217, 255, 0.44),
+    inset 0 -2px 0 rgba(1, 9, 28, 0.82),
+    0 0 0 1px rgba(0, 0, 0, 0.72);
+}
+
+.client-card::after,
+.add-client-button::after,
+.sidebar-calendar-button::after {
+  inset: 0;
+  height: auto;
+  transform: none;
+  opacity: 1;
+  background:
+    radial-gradient(circle at 5px 5px, #6a6d72 0 1.5px, #171513 1.8px 3.2px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 5px) 5px, #6a6d72 0 1.5px, #171513 1.8px 3.2px, transparent 3.5px),
+    radial-gradient(circle at 5px calc(100% - 5px), #6a6d72 0 1.5px, #171513 1.8px 3.2px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 5px) calc(100% - 5px), #6a6d72 0 1.5px, #171513 1.8px 3.2px, transparent 3.5px);
+}
+
+.client-card > span:last-child {
+  text-align: center;
+}
+
+.client-rune {
+  display: none;
+}
+
+.client-card strong,
+.add-client-button,
+.sidebar-calendar-button strong {
+  color: #f2d35b;
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 0 #070402,
+    0 0 3px rgba(255, 229, 90, 0.34);
+}
+
+.client-card small {
+  display: block;
+  margin-top: 4px;
+  color: #b8c7bd;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 #070402;
+}
+
+.client-row:hover .client-card,
+.client-row[data-active="true"] .client-card,
+.add-client-button:hover,
+.sidebar-calendar-button:hover {
+  transform: none;
+  border-color: #18110d;
+  background:
+    linear-gradient(180deg, #74603f 0 4%, #18120e 4% 12%, #443326 12% 16%, #080605 16% 84%, #3d2e22 84% 88%, #17100d 88% 96%, #806a47 96% 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(183, 145, 88, 0.96),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    0 0 8px rgba(27, 91, 175, 0.42),
+    0 4px 5px rgba(0, 0, 0, 0.6);
+}
+
+.client-row:hover .client-card::before,
+.client-row[data-active="true"] .client-card::before,
+.add-client-button:hover::before,
+.sidebar-calendar-button:hover::before {
+  background:
+    linear-gradient(180deg, rgba(154, 210, 255, 0.42), transparent 28%),
+    linear-gradient(90deg, rgba(11, 26, 61, 0.9), rgba(13, 77, 165, 0.98) 18%, rgba(10, 61, 143, 0.98) 74%, rgba(5, 19, 52, 0.92)),
+    linear-gradient(180deg, #1262cb, #07285d);
+}
+
+.add-client-button {
+  margin-top: 0;
+}
+
+.sidebar-calendar {
+  margin-top: auto;
+  display: grid;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 0;
+}
+
+.sidebar-calendar-button {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 3px;
+  min-height: 58px;
+  height: 58px;
+  padding: 9px 30px 10px;
+  text-align: center;
+}
+
+.sidebar-calendar-button span {
+  position: relative;
+  z-index: 1;
+  color: #f2d35b;
+  font-size: 0.68rem;
+  font-weight: 950;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 0 #070402,
+    0 0 3px rgba(255, 229, 90, 0.34);
+}
+
+.sidebar-calendar-button strong {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #b8c7bd;
+  font-size: 0.58rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.status-live {
+  border: 2px solid #15100c;
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(79, 63, 42, 0.86), rgba(12, 10, 8, 0.96) 18%, rgba(7, 10, 9, 0.94)),
+    rgba(8, 9, 8, 0.9);
+  box-shadow:
+    inset 0 0 0 1px rgba(148, 116, 70, 0.68),
+    0 4px 4px rgba(0, 0, 0, 0.48);
+}
+
+#statusTitle.status-live {
+  padding: 8px 10px 2px;
+  border-bottom: 0;
+  border-radius: 2px 2px 0 0;
+  color: #f2d35b;
+  font-size: 0.62rem;
+}
+
+#statusText.status-live {
+  min-height: 48px;
+  padding: 2px 10px 10px;
+  border-top: 0;
+  border-radius: 0 0 2px 2px;
+  color: #b8c7bd;
+  font-size: 0.72rem;
+  line-height: 1.28;
+}
+
+.custom-client-picker {
+  min-height: 58px;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px;
+  gap: 8px;
+  align-items: center;
+  border: 2px solid #15100c;
+  border-radius: 2px;
+  clip-path: none;
+  background:
+    linear-gradient(180deg, #5a4a33 0 4%, #15110e 4% 12%, #32261d 12% 16%, #070605 16% 84%, #30251d 84% 88%, #14100d 88% 96%, #6c583b 96% 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(148, 116, 70, 0.85),
+    0 4px 4px rgba(0, 0, 0, 0.55);
+}
+
+.custom-client-picker::before {
+  inset: 6px 40px 6px 12px;
+  border-color: #2d5f9f;
+  border-radius: 2px;
+  clip-path: none;
+  background:
+    linear-gradient(180deg, rgba(117, 185, 255, 0.32), transparent 26%),
+    linear-gradient(90deg, rgba(12, 23, 52, 0.85), rgba(7, 61, 135, 0.98) 18%, rgba(9, 52, 119, 0.98) 74%, rgba(5, 18, 48, 0.9));
+}
+
+.custom-client-picker::after {
+  display: none;
+}
+
+.custom-client-picker label {
+  display: block;
+}
+
+.custom-client-picker label span {
+  display: none;
+}
+
+.custom-client-picker select {
+  min-height: 40px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #f2d35b;
+  font-size: 0.78rem;
+  font-weight: 950;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 0 #070402,
+    0 0 3px rgba(255, 229, 90, 0.34);
+}
+
+.delete-client-button {
+  width: 30px;
+  height: 40px;
+  border-radius: 2px;
+  clip-path: none;
+}
