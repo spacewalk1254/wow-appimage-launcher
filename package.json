@@ -1,0 +1,46 @@
+{
+  "name": "wow-appimage-launcher",
+  "version": "0.2.0",
+  "description": "Linux AppImage launcher for World of Warcraft private server clients using Steam Proton.",
+  "main": "src/main.js",
+  "author": "Local",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron .",
+    "build:linux": "electron-builder --linux AppImage --x64",
+    "build:linux-arm64": "electron-builder --linux AppImage --arm64",
+    "build:linux-dir": "electron-builder --linux dir --x64"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "local.wow.privatecollection",
+    "productName": "WoW Private Collection",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "build/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Game",
+      "icon": "build/icon.png",
+      "desktop": {
+        "Name": "WoW Private Collection",
+        "Comment": "Launch World of Warcraft private server clients with Steam Proton",
+        "Keywords": "World of Warcraft;WoW;Private Server;Proton;Steam;Game;"
+      }
+    }
+  }
+}

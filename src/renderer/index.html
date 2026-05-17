@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WoW Launcher - Development</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app-shell theme-wotlk">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">W</div>
+          <div>
+            <h1>WoW Launcher</h1>
+          </div>
+        </div>
+
+        <nav id="clientList" class="client-list" aria-label="World of Warcraft versions"></nav>
+        <button id="addClientButton" class="add-client-button" type="button">+ Custom Client</button>
+
+        <section class="sidebar-calendar">
+          <span id="platformBadge" class="visually-hidden">Linux</span>
+          <button id="openCalendarButton" class="sidebar-calendar-button" type="button">
+            <span>Calendar</span>
+            <strong id="sidebarCalendarMonthLabel">Open Schedule</strong>
+          </button>
+          <p id="statusTitle" class="status-live">Ready</p>
+          <p id="statusText" class="status-live">Choose a version, set its executable, and launch with Steam Proton.</p>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <section class="version-hero">
+          <div class="hero-copy">
+            <p id="heroVersion" class="eyebrow">3.3.5</p>
+            <h2 id="heroTitle">Wrath of the Lich King</h2>
+            <p id="heroSubtitle">Northrend client and addon library</p>
+          </div>
+          <div class="hero-actions">
+            <button id="launchButton" class="launch-button" type="button">
+              <span class="play-icon" aria-hidden="true"></span>
+              Launch
+            </button>
+            <label class="instance-picker" title="Instances to launch">
+              <span>Instances</span>
+              <select id="instanceCountSelect">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <nav class="tabs" aria-label="Launcher tabs">
+          <button class="tab-button" type="button" data-tab="launcher" data-active="true">Home</button>
+          <button class="tab-button" type="button" data-tab="addons">Addons</button>
+          <button class="tab-button" type="button" data-tab="screenshots">Screenshots</button>
+          <button class="tab-button" type="button" data-tab="installedGames" hidden>Installed Games</button>
+        </nav>
+
+        <section id="launcherTab" class="tab-panel" data-active="true">
+          <div class="home-panel">
+            <div>
+              <p class="eyebrow">Selected client</p>
+              <h3 id="homeClientTitle">Wrath of the Lich King 3.3.5</h3>
+              <p id="homeClientPath" class="home-path">No executable selected.</p>
+            </div>
+            <div class="playtime-pill">
+              <span>Hours Played</span>
+              <strong id="homePlaytime">0h 0m</strong>
+            </div>
+            <div class="home-actions">
+              <button id="setupToggleButton" class="setup-button" type="button">Client Setup</button>
+              <button id="homeOpenFolderButton" class="secondary-button" type="button">Open Folder</button>
+              <button id="clearCacheButton" class="secondary-button danger-action" type="button">Clear Cache</button>
+            </div>
+          </div>
+
+          <section class="realmlist-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Realm routing</p>
+                <h3>Realmlist Changer</h3>
+              </div>
+              <div class="toolbar-actions">
+                <span class="hint-popover" tabindex="0">
+                  <span class="icon-button hint-trigger" aria-hidden="true">?</span>
+                  <span class="hint-bubble" role="tooltip">Keep multiple realm entries in the realmlist file if you want. Put a # at the start of any realm line you are not using so the client ignores it.</span>
+                </span>
+                <button id="reloadRealmlistButton" class="icon-button" type="button" title="Reload realmlist" aria-label="Reload realmlist">↻</button>
+                <button id="saveRealmlistButton" class="secondary-button" type="button">Write Realmlist</button>
+              </div>
+            </div>
+            <p id="realmListPathLabel" class="path-note">Choose a client executable first.</p>
+            <textarea id="realmListContentInput" rows="3" spellcheck="false" placeholder="set realmlist logon.warmane.com"></textarea>
+          </section>
+
+          <form id="clientForm" class="settings-grid setup-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Client setup</p>
+                <h3 id="settingsTitle">Wrath 3.3.5</h3>
+              </div>
+              <button id="saveClientButton" class="secondary-button" type="submit">Save</button>
+            </div>
+
+            <label class="field-row full">
+              <span>Client Name</span>
+              <input id="clientTitleInput" name="title" placeholder="My Private Server" />
+            </label>
+
+            <label class="field-row">
+              <span>Version Label</span>
+              <input id="clientVersionInput" name="version" placeholder="3.3.5a or Custom" />
+            </label>
+
+            <label class="field-row">
+              <span>Subtitle</span>
+              <input id="clientSubtitleInput" name="subtitle" placeholder="Server or expansion notes" />
+            </label>
+
+            <label class="field-row full">
+              <span>Executable</span>
+              <div class="path-picker">
+                <input id="executableInput" name="executablePath" placeholder="/home/you/Games/WoW Private Servers/wotlk/Wow.exe" />
+                <button id="pickExecutableButton" class="icon-button" type="button" title="Choose Wow.exe" aria-label="Choose Wow.exe">⌄</button>
+              </div>
+            </label>
+
+            <label class="field-row">
+              <span>Working Folder</span>
+              <div class="path-picker">
+                <input id="workingDirectoryInput" name="workingDirectory" placeholder="Defaults to executable folder" />
+                <button id="pickWorkingDirectoryButton" class="icon-button" type="button" title="Choose working folder" aria-label="Choose working folder">▣</button>
+              </div>
+            </label>
+
+            <label class="field-row realm-list-field">
+              <span>Realmlist</span>
+              <input id="realmListInput" name="realmListPath" placeholder="Optional realmlist.wtf path" />
+            </label>
+
+            <label class="field-row">
+              <span>Steam Proton Script</span>
+              <select id="protonSelect"></select>
+            </label>
+
+            <label class="field-row">
+              <span>Custom Proton Path</span>
+              <input id="protonPathInput" name="protonPath" placeholder="/home/you/.steam/steam/steamapps/common/Proton .../proton" />
+            </label>
+
+            <label class="field-row">
+              <span>Proton Prefix</span>
+              <div class="path-picker">
+                <input id="compatDataInput" name="compatDataPath" placeholder="Defaults to launcher data folder" />
+                <button id="pickCompatDataButton" class="icon-button" type="button" title="Choose Proton prefix folder" aria-label="Choose Proton prefix folder">▣</button>
+              </div>
+            </label>
+
+            <label class="field-row">
+              <span>Game Arguments</span>
+              <input id="launchArgsInput" name="launchArgs" placeholder="-console or server-specific flags" />
+            </label>
+
+            <label class="field-row full">
+              <span>Environment</span>
+              <textarea id="environmentInput" rows="4" spellcheck="false"></textarea>
+            </label>
+
+            <label class="field-row full">
+              <span>Notes</span>
+              <textarea id="notesInput" rows="3" placeholder="Realm, account reminders, patch notes, or install details"></textarea>
+            </label>
+
+            <div class="command-panel full">
+              <p class="eyebrow">Launch preview</p>
+              <code id="commandPreview">proton run /path/to/Wow.exe</code>
+            </div>
+          </form>
+        </section>
+
+        <section id="calendarTab" class="tab-panel">
+          <div class="calendar-layout">
+            <section class="calendar-board">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Month view</p>
+                  <h3 id="calendarMonthLabel">Calendar</h3>
+                </div>
+                <div class="toolbar-actions">
+                  <button id="prevMonthButton" class="icon-button" type="button" title="Previous month" aria-label="Previous month">‹</button>
+                  <button id="todayButton" class="secondary-button" type="button">Today</button>
+                  <button id="nextMonthButton" class="icon-button" type="button" title="Next month" aria-label="Next month">›</button>
+                  <button id="openEventsButton" class="secondary-button" type="button">Upcoming</button>
+                </div>
+              </div>
+              <div class="calendar-weekdays" aria-hidden="true">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+              </div>
+              <div id="calendarGrid" class="calendar-grid"></div>
+            </section>
+
+            <form id="calendarForm" class="event-editor">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Custom schedule</p>
+                  <h3>Calendar Event</h3>
+                </div>
+                <button class="secondary-button" type="submit">Save Event</button>
+              </div>
+              <input id="eventIdInput" type="hidden" />
+              <label class="field-row event-date-field">
+                <span>Date</span>
+                <input id="eventDateInput" type="date" required />
+              </label>
+              <label class="field-row event-time-field">
+                <span>Time</span>
+                <input id="eventTimeInput" type="time" />
+              </label>
+              <label class="field-row full">
+                <span>Title</span>
+                <input id="eventTitleInput" placeholder="Raid, reset, tournament, maintenance" required />
+              </label>
+              <label class="field-row event-version-field">
+                <span>Version</span>
+                <select id="eventClientInput"></select>
+              </label>
+              <label class="field-row full">
+                <span>Notes</span>
+                <textarea id="eventNotesInput" rows="5" placeholder="Loot rules, group, Discord, server time, or prep checklist"></textarea>
+              </label>
+            </form>
+
+            <section id="eventListPanel" class="event-list-panel" data-open="false">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Upcoming</p>
+                  <h3>Events</h3>
+                </div>
+                <button id="newEventButton" class="icon-button" type="button" title="New event" aria-label="New event">+</button>
+              </div>
+              <div id="eventList" class="event-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="addonsTab" class="tab-panel">
+          <div class="addons-toolbar">
+            <div>
+              <p class="eyebrow">Selected client addons</p>
+              <h3 id="addonsPathLabel">Interface/Addons</h3>
+            </div>
+            <div class="toolbar-actions">
+              <button id="openAddonsButton" class="secondary-button" type="button">Open Folder</button>
+              <button id="refreshAddonsButton" class="icon-button" type="button" title="Refresh addons" aria-label="Refresh addons">↻</button>
+            </div>
+          </div>
+          <div id="addonsList" class="addons-list"></div>
+        </section>
+
+        <section id="screenshotsTab" class="tab-panel">
+          <div class="screenshots-toolbar">
+            <div>
+              <p class="eyebrow">Selected client screenshots</p>
+              <h3 id="screenshotsPathLabel">Screenshots</h3>
+            </div>
+            <div class="toolbar-actions">
+              <label class="battle-net-screenshot-picker">
+                <span>Game</span>
+                <select id="battleNetScreenshotGameSelect">
+                  <option value="">None</option>
+                </select>
+              </label>
+              <button id="openScreenshotsButton" class="secondary-button" type="button">Open Folder</button>
+              <button id="refreshScreenshotsButton" class="icon-button" type="button" title="Refresh screenshots" aria-label="Refresh screenshots">↻</button>
+            </div>
+          </div>
+          <div id="screenshotsGrid" class="screenshots-grid"></div>
+        </section>
+
+        <section id="installedGamesTab" class="tab-panel">
+          <div class="installed-games-toolbar">
+            <div>
+              <p class="eyebrow">Battle.net library</p>
+              <h3 id="installedGamesPathLabel">Installed Games</h3>
+            </div>
+            <div class="toolbar-actions">
+              <button id="openBattleNetFolderButton" class="secondary-button" type="button">Open Folder</button>
+              <button id="refreshInstalledGamesButton" class="icon-button" type="button" title="Refresh installed games" aria-label="Refresh installed games">↻</button>
+            </div>
+          </div>
+          <div id="installedGamesList" class="installed-games-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="screenshotLightbox" class="screenshot-lightbox" hidden>
+      <div class="screenshot-lightbox-backdrop" data-lightbox-close></div>
+      <section class="screenshot-lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="screenshotLightboxTitle">
+        <div class="screenshot-lightbox-header">
+          <div>
+            <p class="eyebrow">Screenshot preview</p>
+            <h3 id="screenshotLightboxTitle"></h3>
+          </div>
+          <button id="closeScreenshotLightboxButton" class="icon-button" type="button" title="Close preview" aria-label="Close preview">×</button>
+        </div>
+        <div class="screenshot-lightbox-stage">
+          <button id="previousScreenshotButton" class="screenshot-nav-button screenshot-nav-button-previous" type="button" title="Previous screenshot" aria-label="Previous screenshot">‹</button>
+          <img id="screenshotLightboxImage" alt="" />
+          <button id="nextScreenshotButton" class="screenshot-nav-button screenshot-nav-button-next" type="button" title="Next screenshot" aria-label="Next screenshot">›</button>
+        </div>
+        <div class="screenshot-lightbox-footer">
+          <small id="screenshotLightboxMeta"></small>
+          <button id="openScreenshotFileButton" class="secondary-button" type="button">Open File</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

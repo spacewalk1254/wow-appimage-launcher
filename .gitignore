@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.AppImage
+*.snap
+*.deb
+*.rpm
+npm-debug.log*
