@@ -24,10 +24,8 @@
   --blur: blur(24px) saturate(1.24);
   --shadow: 0 26px 72px rgba(0, 0, 0, 0.42);
   --ease: cubic-bezier(.2, .8, .2, 1);
-  --sidebar-rail: #6f7f8d;
-  --sidebar-rail-strong: #9aa8b3;
-  --sidebar-panel: #222831;
-  --sidebar-panel-dark: #10151b;
+  --wc3-gold: #c49a4f;
+  --wc3-gold-bright: #e1c178;
   --iron: #24211e;
   --iron-dark: #0d0d0c;
   --bone: #c7aa77;
@@ -158,21 +156,24 @@ button:disabled {
   position: relative;
   height: 100vh;
   min-height: 0;
-  padding: 18px;
+  padding: 18px 16px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   overflow: hidden;
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  border-right: 3px solid #06090d;
   background:
-    linear-gradient(90deg, rgba(2, 4, 7, 0.42), transparent 36%, rgba(2, 4, 7, 0.3)),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 10px),
-    linear-gradient(155deg, #222831 0%, #171d24 42%, #0d1117 100%);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.72), transparent 32%, rgba(0, 0, 0, 0.42)),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.024) 0 2px, transparent 2px 13px),
+    repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 9px),
+    linear-gradient(155deg, #28333c 0%, #151d25 42%, #080d13 100%);
   backdrop-filter: blur(16px) saturate(1.08);
   box-shadow:
-    inset -1px 0 0 rgba(255, 255, 255, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
-    24px 0 48px rgba(0, 0, 0, 0.38);
+    inset -9px 0 0 rgba(7, 10, 14, 0.92),
+    inset -12px 0 0 rgba(196, 154, 79, 0.54),
+    inset -15px 0 0 rgba(24, 42, 55, 0.72),
+    inset 0 0 0 1px rgba(225, 193, 120, 0.13),
+    24px 0 48px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar::before,
@@ -185,21 +186,25 @@ button:disabled {
 .sidebar::before {
   inset: 0;
   background:
-    radial-gradient(circle at 34px 32px, rgba(154, 168, 179, 0.13), transparent 76px),
-    radial-gradient(circle at 84% 88%, rgba(102, 179, 170, 0.12), transparent 110px),
-    linear-gradient(90deg, transparent 0 92%, rgba(255, 255, 255, 0.045) 92% 93%, transparent 93% 100%);
-  opacity: 0.75;
+    radial-gradient(circle at 42px 34px, rgba(74, 166, 216, 0.2), transparent 82px),
+    radial-gradient(circle at 82% 88%, rgba(196, 154, 79, 0.18), transparent 115px),
+    linear-gradient(90deg, transparent 0 86%, rgba(225, 193, 120, 0.2) 86% 87%, transparent 87% 100%);
+  opacity: 0.9;
 }
 
 .sidebar::after {
   top: 0;
   right: 0;
-  width: 10px;
+  width: 22px;
   height: 100%;
   background:
-    linear-gradient(180deg, rgba(154, 168, 179, 0.32), rgba(16, 21, 27, 0.88) 34%, rgba(102, 179, 170, 0.2) 66%, rgba(10, 13, 18, 0.96));
-  opacity: 0.72;
-  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.08);
+    linear-gradient(135deg, transparent 0 29%, #05080b 29% 52%, transparent 52% 100%) 0 0 / 22px 42px,
+    linear-gradient(180deg, #70552b, #141a20 18%, #2f5167 42%, #111820 66%, #9a7439);
+  opacity: 0.98;
+  box-shadow:
+    -2px 0 0 rgba(225, 193, 120, 0.5),
+    -5px 0 0 rgba(0, 0, 0, 0.72),
+    inset 2px 0 0 rgba(255, 255, 255, 0.08);
 }
 
 .sidebar > * {
@@ -233,16 +238,17 @@ button:disabled {
 .brand {
   gap: 12px;
   padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.105);
-  border-radius: 8px;
+  border: 2px solid #080b0f;
+  border-radius: 6px;
   background:
-    linear-gradient(90deg, rgba(154, 168, 179, 0.18), transparent 42%),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 16px),
-    linear-gradient(180deg, #2a313a, #151b22 64%, #0b0f14);
+    linear-gradient(90deg, rgba(74, 166, 216, 0.16), transparent 38%),
+    repeating-linear-gradient(90deg, rgba(225, 193, 120, 0.065) 0 2px, transparent 2px 16px),
+    linear-gradient(180deg, #36434e, #19222b 64%, #080d13);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 5px 0 0 rgba(154, 168, 179, 0.24),
-    0 14px 20px rgba(0, 0, 0, 0.26);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.08),
+    inset 7px 0 0 rgba(196, 154, 79, 0.42),
+    0 14px 20px rgba(0, 0, 0, 0.34);
 }
 
 .brand > div:last-child {
@@ -256,18 +262,21 @@ button:disabled {
   place-items: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 7px;
+  border: 2px solid #070a0e;
+  border-radius: 6px;
   background:
-    linear-gradient(135deg, transparent 0 16%, rgba(0, 0, 0, 0.22) 16% 22%, transparent 22% 100%),
-    linear-gradient(45deg, #34414d 0 48%, #111820 48% 52%, #526270 52% 100%);
-  color: #e4ebf1;
+    linear-gradient(135deg, transparent 0 16%, rgba(0, 0, 0, 0.28) 16% 22%, transparent 22% 100%),
+    radial-gradient(circle at 50% 45%, rgba(74, 166, 216, 0.38), transparent 38%),
+    linear-gradient(45deg, #69502a 0 48%, #111820 48% 52%, #b68b45 52% 100%);
+  color: #f3dfad;
   font-weight: 950;
-  text-shadow: 0 2px 0 #06090c;
+  text-shadow:
+    0 2px 0 #050403,
+    0 0 12px rgba(74, 166, 216, 0.52);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 -12px 0 rgba(0, 0, 0, 0.18),
-    0 12px 18px rgba(0, 0, 0, 0.25);
+    inset 0 0 0 2px rgba(225, 193, 120, 0.16),
+    inset 0 -12px 0 rgba(0, 0, 0, 0.24),
+    0 12px 18px rgba(0, 0, 0, 0.35);
   transform: none;
 }
 
@@ -334,17 +343,17 @@ label span {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.105);
-  border-radius: 7px;
+  border: 2px solid #080b0f;
+  border-radius: 6px;
   background:
-    linear-gradient(90deg, rgba(154, 168, 179, 0.14), transparent 52%),
-    linear-gradient(180deg, #242b34, #10151b);
-  color: #e4ebf1;
+    linear-gradient(90deg, rgba(196, 154, 79, 0.2), transparent 52%),
+    linear-gradient(180deg, #303b45, #101820);
+  color: #f0d28f;
   font-weight: 850;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.045),
-    inset 5px 0 0 rgba(154, 168, 179, 0.22),
-    0 12px 18px rgba(0, 0, 0, 0.22);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.14),
+    inset 6px 0 0 rgba(196, 154, 79, 0.34),
+    0 12px 18px rgba(0, 0, 0, 0.3);
 }
 
 .client-card {
@@ -354,19 +363,19 @@ label span {
   padding: 11px 12px 11px 11px;
   gap: 11px;
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.105);
-  border-radius: 8px;
+  border: 2px solid #080b0f;
+  border-radius: 6px;
   background:
-    linear-gradient(90deg, rgba(154, 168, 179, 0.12), transparent 42%),
+    linear-gradient(90deg, rgba(196, 154, 79, 0.14), transparent 42%),
     repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 12px),
-    linear-gradient(180deg, #242b34, #141a21 62%, #0a0f14);
+    linear-gradient(180deg, #303a43, #151f28 62%, #080d13);
   color: var(--text);
   text-align: left;
   overflow: hidden;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.045),
-    inset 5px 0 0 rgba(154, 168, 179, 0.16),
-    0 14px 18px rgba(0, 0, 0, 0.24);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.12),
+    inset 6px 0 0 rgba(47, 81, 103, 0.74),
+    0 14px 18px rgba(0, 0, 0, 0.3);
 }
 
 .client-card::before,
@@ -377,7 +386,7 @@ label span {
   inset: 0 auto 0 0;
   width: 9px;
   border-radius: 0;
-  background: linear-gradient(180deg, #5e6e7c, var(--sidebar-rail), #2a343e);
+  background: linear-gradient(180deg, #d4b76f, var(--wc3-gold), #4f3717);
   pointer-events: none;
   opacity: 0.88;
   z-index: 0;
@@ -418,15 +427,15 @@ label span {
 .custom-client-picker:hover,
 .sidebar-calendar-button:hover {
   transform: translateX(2px);
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: #0a0d11;
   background:
-    linear-gradient(90deg, rgba(154, 168, 179, 0.2), transparent 48%),
+    linear-gradient(90deg, rgba(74, 166, 216, 0.22), transparent 48%),
     repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 12px),
-    linear-gradient(180deg, #2c3540, #171f28 62%, #0a0f14);
+    linear-gradient(180deg, #3a4650, #192734 62%, #080d13);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    inset 5px 0 0 rgba(154, 168, 179, 0.3),
-    0 16px 22px rgba(0, 0, 0, 0.28);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.18),
+    inset 6px 0 0 rgba(196, 154, 79, 0.46),
+    0 16px 22px rgba(0, 0, 0, 0.36);
 }
 
 .tab-button:hover,
@@ -453,14 +462,15 @@ label span {
 }
 
 .client-row[data-active="true"] .client-card {
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: #080b0f;
   background:
-    linear-gradient(90deg, rgba(138, 184, 216, 0.26), transparent 50%),
-    linear-gradient(180deg, #2f3b46, #17202a 68%, #0a0f14);
+    linear-gradient(90deg, rgba(74, 166, 216, 0.34), transparent 50%),
+    linear-gradient(180deg, #40505a, #182a39 68%, #080d13);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 7px 0 0 var(--sidebar-rail-strong),
-    0 18px 24px rgba(0, 0, 0, 0.34);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.24),
+    inset 8px 0 0 var(--wc3-gold-bright),
+    0 18px 24px rgba(0, 0, 0, 0.42),
+    0 0 24px rgba(74, 166, 216, 0.1);
 }
 
 .client-row[data-active="true"] .client-card::before {
@@ -487,10 +497,10 @@ label span {
   flex: 0 0 34px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.105);
-  border-radius: 7px;
+  border: 2px solid #080b0f;
+  border-radius: 6px;
   background:
-    linear-gradient(180deg, #3a2730, #181117);
+    linear-gradient(180deg, #513137, #181117);
   color: #f3c8ca;
   font-weight: 900;
 }
@@ -505,27 +515,27 @@ label span {
   align-items: end;
   isolation: isolate;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.105);
-  border-radius: 8px;
+  border: 2px solid #080b0f;
+  border-radius: 6px;
   background:
-    linear-gradient(90deg, rgba(154, 168, 179, 0.12), transparent 44%),
+    linear-gradient(90deg, rgba(196, 154, 79, 0.14), transparent 44%),
     repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 12px),
-    linear-gradient(180deg, #242b34, #141a21 62%, #0a0f14);
+    linear-gradient(180deg, #303a43, #151f28 62%, #080d13);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.045),
-    inset 5px 0 0 rgba(154, 168, 179, 0.16),
-    0 14px 18px rgba(0, 0, 0, 0.24);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.12),
+    inset 6px 0 0 rgba(47, 81, 103, 0.74),
+    0 14px 18px rgba(0, 0, 0, 0.3);
 }
 
 .custom-client-picker[data-active="true"] {
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: #080b0f;
   background:
-    linear-gradient(90deg, rgba(138, 184, 216, 0.24), transparent 50%),
-    linear-gradient(180deg, #2f3b46, #17202a 68%, #0a0f14);
+    linear-gradient(90deg, rgba(74, 166, 216, 0.32), transparent 50%),
+    linear-gradient(180deg, #40505a, #182a39 68%, #080d13);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 7px 0 0 var(--sidebar-rail-strong),
-    0 18px 24px rgba(0, 0, 0, 0.34);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.24),
+    inset 8px 0 0 var(--wc3-gold-bright),
+    0 18px 24px rgba(0, 0, 0, 0.42);
 }
 
 .custom-client-picker label {
@@ -553,27 +563,29 @@ label span {
   flex: 0 0 50px;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 7px;
+  border: 2px solid #070a0e;
+  border-radius: 6px;
   background:
     linear-gradient(135deg, transparent 0 18%, rgba(0, 0, 0, 0.28) 18% 24%, transparent 24% 100%),
-    linear-gradient(180deg, #34404b, #151b22 62%, #0a0f14);
-  color: #d9e3eb;
+    radial-gradient(circle at 50% 38%, rgba(74, 166, 216, 0.2), transparent 40%),
+    linear-gradient(180deg, #4a5964, #18222b 62%, #080d13);
+  color: #f0d28f;
   font-size: 0.78rem;
   font-weight: 950;
   text-shadow: 0 2px 0 #050403;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 0 1px rgba(225, 193, 120, 0.14),
     inset 0 -9px 0 rgba(0, 0, 0, 0.24);
 }
 
 .client-row[data-active="true"] .client-rune {
   background:
     linear-gradient(135deg, transparent 0 18%, rgba(0, 0, 0, 0.3) 18% 24%, transparent 24% 100%),
-    linear-gradient(180deg, #526270, #202b35 68%, #080d12);
-  color: #f2f6f8;
+    radial-gradient(circle at 50% 38%, rgba(74, 166, 216, 0.32), transparent 42%),
+    linear-gradient(180deg, #7b6231, #243848 68%, #080d12);
+  color: #f6e0a6;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(225, 193, 120, 0.2),
     inset 0 -9px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -606,7 +618,7 @@ label span {
   display: grid;
   gap: 10px;
   padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid #080b0f;
 }
 
 .sidebar-calendar-button {
@@ -618,17 +630,17 @@ label span {
   gap: 4px;
   isolation: isolate;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.105);
-  border-radius: 8px;
+  border: 2px solid #080b0f;
+  border-radius: 6px;
   background:
-    linear-gradient(90deg, rgba(154, 168, 179, 0.16), transparent 54%),
-    linear-gradient(180deg, #242b34, #10151b);
+    linear-gradient(90deg, rgba(196, 154, 79, 0.18), transparent 54%),
+    linear-gradient(180deg, #303a43, #101820);
   color: var(--text);
   text-align: center;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.045),
-    inset 5px 0 0 rgba(154, 168, 179, 0.22),
-    0 12px 18px rgba(0, 0, 0, 0.24);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.14),
+    inset 6px 0 0 rgba(196, 154, 79, 0.32),
+    0 12px 18px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-calendar-button span {
@@ -655,13 +667,13 @@ label span {
   position: relative;
   display: block;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.105);
+  border: 2px solid #080b0f;
   background:
-    linear-gradient(90deg, rgba(154, 168, 179, 0.12), transparent 45%),
-    linear-gradient(180deg, #171d24, #0a0f14);
+    linear-gradient(90deg, rgba(74, 166, 216, 0.12), transparent 45%),
+    linear-gradient(180deg, #17222b, #080d13);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 12px 18px rgba(0, 0, 0, 0.24);
+    inset 0 0 0 1px rgba(225, 193, 120, 0.1),
+    0 12px 18px rgba(0, 0, 0, 0.3);
 }
 
 #statusTitle.status-live {
